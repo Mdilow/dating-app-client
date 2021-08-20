@@ -1,21 +1,23 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="#">Dating App</a>
+        <a class="navbar-brand" routerLink='/' routerLinkActive='active'>Relationship Recruiting Agency</a>
 
-          <ul class="navbar-nav mr-auto" *ngIf="accountService.currentUser$| async">
-            <li class="nav-item ">
-              <a class="nav-link" href="#">Potentials </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Lists</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="#">Messages</a>
-            </li>
+          <ul class="navbar-nav mr-auto">
+            <ng-container  *ngIf="accountService.currentUser$ | async">
+              <li class="nav-item ">
+                <a class="nav-link "routerLink='/members' routerLinkActive='active'>Potentials </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink='/lists' routerLinkActive='active'>Lists</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " routerLink='/messages' routerLinkActive='active'>Messages</a>
+              </li>
+            </ng-container>
           </ul>
-            <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
+            <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
                 
-                <a class="dropdown-toggle text-light" dropdownToggle> Welcome user</a>
+                <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username | titlecase}}</a>
                 <ul class="dropdown-menu mt-3" *dropdownMenu>
                     <li href="" class="dropdown-item">Edit Profile</li>
                     <li class="dropdown-divider"></li>
@@ -29,5 +31,5 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
           </form>
     </div>
-   
+   <!-- *ngIf="accountService.currentUser$| async"-->
   </nav>
